@@ -16,8 +16,8 @@ function WelcomeScreen() {
         />
         <Text style={styles.logoText}>Sell what you dont need</Text>
       </View>
-      <AppButton name={"signup"} />
-      <AppButton name={"login"} />
+      <AppButton name={"signup"} color="secondaryColor" />
+      <AppButton name={"login"} color="primaryColor" />
     </ImageBackground>
   );
 }

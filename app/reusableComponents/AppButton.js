@@ -1,10 +1,16 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
+import * as appColor from "../config/appColors";
 
-function AppButton({ name }) {
+function AppButton({ name, color }) {
   return (
     <View>
-      <View style={name === "login" ? styles.loginButton : styles.signupButton}>
+      <View
+        style={[
+          name === "login" ? styles.loginButton : styles.signupButton,
+          { backgroundColor: appColor[color] },
+        ]}
+      >
         <Text style={styles.loginText}>{name}</Text>
       </View>
     </View>
@@ -13,22 +19,24 @@ function AppButton({ name }) {
 
 const styles = StyleSheet.create({
   signupButton: {
-    backgroundColor: "#fc5c65",
     width: "100%",
     height: 50,
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 20,
+    marginBottom: 5,
   },
   loginButton: {
-    backgroundColor: "#4ECDC4",
     width: "100%",
     height: 50,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 20,
+    marginBottom: 5,
   },
   loginText: {
-    color: "#fff",
+    color: appColor.white,
     textTransform: "uppercase",
     fontWeight: "600",
   },
