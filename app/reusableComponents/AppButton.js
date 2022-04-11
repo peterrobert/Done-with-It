@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   loginText: {
     color: appColor.white,
     textTransform: "uppercase",
-    fontWeight: "600",
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });
 
