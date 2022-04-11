@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import * as appColor from "../config/appColors";
 
-function AppButton({ name, color }) {
+function AppButton({ name, color, onPress }) {
   return (
-    <View>
+    <TouchableOpacity onPress={onPress}>
       <View
         style={[
           name === "login" ? styles.loginButton : styles.signupButton,
@@ -13,7 +13,7 @@ function AppButton({ name, color }) {
       >
         <Text style={styles.loginText}>{name}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
