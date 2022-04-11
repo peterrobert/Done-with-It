@@ -9,9 +9,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {/* <ViewImageScreen /> */}
-      <WelcomeScreen />
+      {/* <WelcomeScreen /> */}
       {/* <Card /> */}
-      {/* <ListingDetailsScreen /> */}
+      <ListingDetailsScreen />
     </SafeAreaView>
   );
 }
