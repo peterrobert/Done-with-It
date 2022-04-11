@@ -1,13 +1,24 @@
 import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import * as appColor from "../config/appColors";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function ViewImageScreen() {
   return (
     <View style={styles.viewImageConatiner}>
       <View style={styles.buttonContainer}>
-        <View style={styles.cancelIcon}></View>
-        <View style={styles.nextIcon}></View>
+        <MaterialIcons
+          name="cancel"
+          size={30}
+          color={`${appColor.white}`}
+          style={styles.cancelIcon}
+        />
+        <MaterialIcons
+          name="delete-sweep"
+          size={30}
+          color={`${appColor.white}`}
+          style={styles.nextIcon}
+        />
       </View>
 
       <View style={styles.imageContainer}>
@@ -35,16 +46,10 @@ const styles = StyleSheet.create({
   },
 
   cancelIcon: {
-    backgroundColor: appColor.secondaryColor,
-    height: 40,
-    width: 60,
     left: -70,
   },
 
   nextIcon: {
-    backgroundColor: appColor.primaryColor,
-    height: 40,
-    width: 60,
     right: -70,
   },
 
