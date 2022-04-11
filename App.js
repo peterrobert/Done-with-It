@@ -3,12 +3,14 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import * as appColor from "./app/config/appColors";
 import Card from "./app/reusableComponents/Card";
+import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {/* <WelcomeScreen /> */}
-      <Card />
+      {/* <Card /> */}
+      <ListingDetailsScreen />
     </SafeAreaView>
   );
 }
