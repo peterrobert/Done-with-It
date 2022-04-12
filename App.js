@@ -4,6 +4,7 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import * as appColor from "./app/config/appColors";
 import Card from "./app/reusableComponents/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import MessageScreen from "./app/screens/MessageScreen";
 
 export default function App() {
   return (
@@ -11,7 +12,8 @@ export default function App() {
       {/* <ViewImageScreen /> */}
       {/* <WelcomeScreen /> */}
       {/* <Card /> */}
-      <ListingDetailsScreen />
+      {/* <ListingDetailsScreen /> */}
+      <MessageScreen />
     </SafeAreaView>
   );
 }

@@ -3,16 +3,13 @@ import { View, StyleSheet, Image, Text } from "react-native";
 
 import * as appColor from "../config/appColors";
 
-function ListItem() {
+function ListItem({ title, subTitle, image }) {
   return (
     <View style={styles.sellersInfo}>
-      <Image
-        source={require("../assets/mosh.jpg")}
-        style={styles.sellerImage}
-      />
+      <Image source={image} style={styles.sellerImage} />
       <View style={styles.sellerName}>
-        <Text style={styles.actualName}>Mosh Hamedani</Text>
-        <Text style={styles.numberOfListings}>5 listings</Text>
+        <Text style={styles.actualName}>{title}</Text>
+        <Text style={styles.numberOfListings}>{subTitle} </Text>
       </View>
     </View>
   );
