@@ -8,9 +8,9 @@ function SeparatorComponent() {
 
 const styles = StyleSheet.create({
   separtatorContainer: {
-    borderBottomColor: appColor.grey,
-    borderStyle: "solid",
-    borderWidth: 0.5,
+    width: "100%",
+    backgroundColor: appColor.grey,
+    height: 1,
   },
 });
 
