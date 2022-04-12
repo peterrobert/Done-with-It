@@ -18,7 +18,7 @@ function ListItem({ title, subTitle, image }) {
 const styles = StyleSheet.create({
   sellersInfo: {
     flexDirection: "row",
-    marginTop: 50,
+    marginTop: 10,
     paddingLeft: 20,
   },
   sellerImage: {
