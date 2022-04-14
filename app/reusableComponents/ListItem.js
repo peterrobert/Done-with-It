@@ -10,12 +10,24 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import * as appColor from "../config/appColors";
 
-function ListItem({ title, subTitle, image, onPress, renderLeftActions }) {
+function ListItem({
+  title,
+  subTitle,
+  image,
+  onPress,
+  renderLeftActions,
+  icon,
+}) {
   return (
     <Swipeable renderLeftActions={renderLeftActions}>
       <TouchableHighlight onPress={onPress} underlayColor={appColor.lightGrey}>
         <View style={styles.sellersInfo}>
-          <Image source={image} style={styles.sellerImage} />
+          {image === undefined && icon !== undefined ? (
+            <View style={styles.sellerIcon}>{icon}</View>
+          ) : (
+            <Image source={image} style={styles.sellerImage} />
+          )}
+
           <View style={styles.sellerName}>
             <Text style={styles.actualName}>{title}</Text>
             <Text style={styles.numberOfListings}>{subTitle} </Text>
@@ -36,6 +48,14 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 40,
+  },
+  sellerIcon: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    backgroundColor: appColor.primaryColor,
+    alignItems: "center",
+    justifyContent: "center",
   },
   sellerName: {
     paddingLeft: 10,
