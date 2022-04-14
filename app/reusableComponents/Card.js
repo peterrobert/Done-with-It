@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 10,
     paddingRight: 10,
+    marginBottom: 20,
   },
   cardContainer: {
     width: "100%",

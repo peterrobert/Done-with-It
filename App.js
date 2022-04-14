@@ -7,6 +7,7 @@ import Card from "./app/reusableComponents/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import MessageScreen from "./app/screens/MessageScreen";
 import AccountScreen from "./app/screens/AccountScreen";
+import ListingScreen from "./app/screens/ListingScreen";
 
 export default function App() {
   return (
@@ -16,7 +17,8 @@ export default function App() {
       {/* <Card /> */}
       {/* <ListingDetailsScreen /> */}
       {/* <MessageScreen /> */}
-      <AccountScreen />
+      {/* <AccountScreen /> */}
+      <ListingScreen />
     </SafeAreaView>
   );
 }
