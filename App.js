@@ -1,4 +1,5 @@
 import { StyleSheet, SafeAreaView, Platform, StatusBar } from "react-native";
+// import expo gestures for swipping
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import * as appColor from "./app/config/appColors";

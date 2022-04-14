@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, FlatList } from "react-native";
 import ListItem from "../reusableComponents/ListItem";
 import SeparatorComponent from "../reusableComponents/SeparatorComponent";
+// === For use to have a swipe functionality we must install expo gesture handlers.
+// === I will come back to this taking so much time
 
 const data = [
   {
@@ -31,24 +33,30 @@ const data = [
 ];
 
 function MessageScreen() {
+  const onPress = () => {
+    console.log("This touched");
+  };
+
   const renderItem = ({ item }) => {
     return (
       <ListItem
         title={item.title}
         subTitle={item.descrption}
         image={item.image}
+        onPress={onPress}
+        renderRightActions={() => {
+          return <View style={{ backgroundColor: "red", width: 70 }}></View>;
+        }}
       />
     );
   };
   return (
-    <View>
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={renderItem}
-        ItemSeparatorComponent={() => <SeparatorComponent />}
-      />
-    </View>
+    <FlatList
+      data={data}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={renderItem}
+      ItemSeparatorComponent={() => <SeparatorComponent />}
+    />
   );
 }
 
