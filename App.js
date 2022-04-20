@@ -10,6 +10,7 @@ import ListingScreen from "./app/screens/ListingScreen";
 import AppTextInput from "./app/reusableComponents/AppTextInput";
 import AppPicker from "./app/reusableComponents/AppPicker";
 import Screen from "./app/reusableComponents/Screen";
+import react, { useState } from "react";
 
 const categoriesData = [
   {
@@ -27,6 +28,7 @@ const categoriesData = [
 ];
 
 export default function App() {
+  const [category, setCategory] = useState(categoriesData[0].category);
   return (
     <Screen>
       {/* <ViewImageScreen /> */}
@@ -38,9 +40,10 @@ export default function App() {
       {/* <ListingScreen /> */}
       {/* <AppTextInput /> */}
       <AppPicker
-        placeholder={"Categories"}
+        placeholder={category}
         icon={"apps"}
         items={categoriesData}
+        setCategory={setCategory}
       />
     </Screen>
   );

@@ -8,7 +8,7 @@ import { useFonts } from "expo-font";
 import { TouchableWithoutFeedback } from "react-native";
 import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, placeholder, items, ...otherProps }) {
+function AppPicker({ icon, placeholder, items, setCategory, ...otherProps }) {
   const [showModal, setShowModal] = useState(false);
   const [loaded] = useFonts({
     robotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
@@ -19,7 +19,13 @@ function AppPicker({ icon, placeholder, items, ...otherProps }) {
   }
 
   const renderItem = ({ item }) => (
-    <PickerItem name={item.category} onPress={() => console.log(item)} />
+    <PickerItem
+      name={item.category}
+      onPress={() => {
+        setCategory(item.category);
+        setShowModal(false);
+      }}
+    />
   );
 
   return (
