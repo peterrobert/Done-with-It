@@ -8,6 +8,8 @@ import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import MessageScreen from "./app/screens/MessageScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingScreen from "./app/screens/ListingScreen";
+import AppTextInput from "./app/reusableComponents/AppTextInput";
+import AppPicker from "./app/reusableComponents/AppPicker";
 
 export default function App() {
   return (
@@ -18,7 +20,9 @@ export default function App() {
       {/* <ListingDetailsScreen /> */}
       {/* <MessageScreen /> */}
       {/* <AccountScreen /> */}
-      <ListingScreen />
+      {/* <ListingScreen /> */}
+      {/* <AppTextInput /> */}
+      <AppPicker />
     </SafeAreaView>
   );
 }
