@@ -35,25 +35,24 @@ function AppTextInput({ icon, ...otherProps }) {
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
-    alignItems: "center",
     paddingLeft: 20,
     paddingRight: 20,
     flexDirection: "row",
     backgroundColor: appColor.lightGrey,
     borderRadius: 20,
+    width: "100%",
+    marginBottom: 10,
   },
   input: {
     height: 25,
     margin: 10,
-    width: "100%",
     color: appColor.black,
     fontSize: 18,
     textTransform: "capitalize",
     fontWeight: "500",
   },
   icon: {
-    marginLeft: 20,
+    marginTop: 10,
   },
 });
 

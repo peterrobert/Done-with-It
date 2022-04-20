@@ -22,7 +22,7 @@ export default function App() {
       {/* <AccountScreen /> */}
       {/* <ListingScreen /> */}
       {/* <AppTextInput /> */}
-      <AppPicker />
+      <AppPicker placeholder={"Categories"} icon={"apps"} />
     </SafeAreaView>
   );
 }
