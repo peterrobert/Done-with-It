@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Modal, Button } from "react-native";
+import { Text, View, StyleSheet, Modal, Button, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as appColor from "../config/appColors";
 
 // ===This is supposed to be shared
 import { useFonts } from "expo-font";
 import { TouchableWithoutFeedback } from "react-native";
+import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, placeholder, ...otherProps }) {
+function AppPicker({ icon, placeholder, items, ...otherProps }) {
   const [showModal, setShowModal] = useState(false);
   const [loaded] = useFonts({
     robotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
@@ -16,6 +17,10 @@ function AppPicker({ icon, placeholder, ...otherProps }) {
   if (!loaded) {
     return null;
   }
+
+  const renderItem = ({ item }) => (
+    <PickerItem name={item.category} onPress={() => console.log(item)} />
+  );
 
   return (
     <>
@@ -41,12 +46,20 @@ function AppPicker({ icon, placeholder, ...otherProps }) {
           />
         </View>
       </TouchableWithoutFeedback>
-      <Modal
-        animationType="slide"
-        visible={showModal}
-        style={styles.modalConatiner}
-      >
-        <Button title="Click me to close" onPress={() => setShowModal(false)} />
+      <Modal animationType="slide" visible={showModal}>
+        <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
+          <MaterialCommunityIcons
+            name="close"
+            size={25}
+            color={appColor.grey}
+            style={[styles.icon, styles.closeButton]}
+          />
+        </TouchableWithoutFeedback>
+        <FlatList
+          data={items}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderItem}
+        />
       </Modal>
     </>
   );
@@ -75,9 +88,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 10,
   },
-
-  modalConatiner: {
-    flex: 1,
+  closeButton: {
+    textAlign: "right",
+    paddingRight: 25,
   },
 });
 
