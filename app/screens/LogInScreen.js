@@ -1,9 +1,17 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Text } from "react-native";
 import { Formik } from "formik";
+// === Form validation using yup == Import it first ===
+import * as yup from "yup";
 
 import AppTextInput from "../reusableComponents/AppTextInput";
 import AppButton from "../reusableComponents/AppButton";
+import AppErrors from "../reusableComponents/AppErrors";
+// === Define yup validation schema out side of the component to avoid re-render
+let schema = yup.object().shape({
+  email: yup.string().email().required().label("Email"),
+  password: yup.string().min(4).required().label("Password"),
+});
 
 function LogInScreen() {
   return (
@@ -12,8 +20,9 @@ function LogInScreen() {
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
+        validationSchema={schema}
       >
-        {({ handleChange, handleSubmit }) => {
+        {({ handleChange, handleSubmit, errors, touched }) => {
           return (
             <>
               <AppTextInput
@@ -25,6 +34,7 @@ function LogInScreen() {
                 textContentType="emailAddress"
                 onChangeText={handleChange("email")}
               />
+              {touched.email ? <AppErrors>{errors.email}</AppErrors> : null}
               <AppTextInput
                 icon="account-lock"
                 placeholder="Password"
@@ -32,6 +42,9 @@ function LogInScreen() {
                 textContentType="password"
                 onChangeText={handleChange("password")}
               />
+              {touched.password && errors.password ? (
+                <AppErrors>{errors.password}</AppErrors>
+              ) : null}
               <AppButton
                 name="login"
                 color="secondaryColor"
