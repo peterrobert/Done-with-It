@@ -1,30 +1,39 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Formik } from "formik";
-// === Form validation using yup == Import it first ===
 import * as yup from "yup";
 
 import AppTextInput from "../reusableComponents/AppTextInput";
 import AppButton from "../reusableComponents/AppButton";
 import AppErrors from "../reusableComponents/AppErrors";
-// === Define yup validation schema out side of the component to avoid re-render
+
 let schema = yup.object().shape({
-  email: yup.string().email().required().label("Email"),
+  name: yup.string().required().min(6).label("Name"),
+  email: yup.string().email().label("Email"),
   password: yup.string().min(4).required().label("Password"),
 });
 
-function LogInScreen() {
+function RegisterScreen() {
   return (
-    <View>
-      <Image source={require("../assets/logo-red.png")} style={styles.logo} />
+    <View style={styles.registerContainer}>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ name: "", email: "", password: "" }}
         onSubmit={(values) => console.log(values)}
         validationSchema={schema}
       >
-        {({ handleChange, handleSubmit, errors, touched, setFieldTouched }) => {
+        {({ handleChange, handleSubmit, touched, setFieldTouched, errors }) => {
           return (
             <>
+              <AppTextInput
+                icon="face-woman"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoComplete={false}
+                placeholder="Name"
+                onChangeText={handleChange("name")}
+                onBlur={() => setFieldTouched("name")}
+              />
+              {touched.name && <AppErrors>{errors.name}</AppErrors>}
               <AppTextInput
                 icon="email"
                 autoCapitalize="none"
@@ -57,15 +66,11 @@ function LogInScreen() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  logo: {
-    height: 80,
-    width: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
+  registerContainer: {
+    padding: 10,
+    marginTop: 30,
   },
 });
 
-export default LogInScreen;
+export default RegisterScreen;
