@@ -2,22 +2,11 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Modal, Button, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as appColor from "../config/appColors";
-
-// ===This is supposed to be shared
-import { useFonts } from "expo-font";
 import { TouchableWithoutFeedback } from "react-native";
 import PickerItem from "./PickerItem";
 
 function AppPicker({ icon, placeholder, items, setCategory, ...otherProps }) {
   const [showModal, setShowModal] = useState(false);
-  const [loaded] = useFonts({
-    robotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
-  });
-
-  if (!loaded) {
-    return null;
-  }
-
   const renderItem = ({ item }) => (
     <PickerItem
       name={item.category}
@@ -40,9 +29,7 @@ function AppPicker({ icon, placeholder, items, setCategory, ...otherProps }) {
               style={styles.icon}
             />
           )}
-          <Text style={[styles.input, { fontFamily: "robotoMedium" }]}>
-            {placeholder}
-          </Text>
+          <Text style={styles.input}>{placeholder}</Text>
 
           <MaterialCommunityIcons
             name="arrow-down-bold-circle"

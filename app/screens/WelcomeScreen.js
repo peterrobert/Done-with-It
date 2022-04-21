@@ -1,18 +1,8 @@
 import React from "react";
 import { ImageBackground, Text, View, StyleSheet, Image } from "react-native";
 import AppButton from "../reusableComponents/AppButton";
-// === Using expo fonts to load my fonts
-import { useFonts } from "expo-font";
 
 function WelcomeScreen() {
-  const [loaded] = useFonts({
-    robotoMedium: require("../assets/fonts/Roboto-Medium.ttf"),
-  });
-
-  if (!loaded) {
-    return null;
-  }
-
   return (
     <ImageBackground
       source={require("../assets/background.jpg")}
@@ -25,9 +15,7 @@ function WelcomeScreen() {
           source={require("../assets/logo-red.png")}
           style={styles.logoImage}
         />
-        <Text style={[styles.logoText, { fontFamily: "robotoMedium" }]}>
-          Sell what you dont need
-        </Text>
+        <Text style={styles.logoText}>Sell what you dont need</Text>
       </View>
       <AppButton name={"Log in"} color="secondaryColor" />
       <AppButton name={"Register"} color="primaryColor" />
