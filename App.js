@@ -6,6 +6,7 @@ export default function App() {
   return (
     <Screen>
       <RegisterScreen />
+      {/* <LogInScreen /> */}
     </Screen>
   );
 }

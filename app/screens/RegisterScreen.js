@@ -6,10 +6,11 @@ import * as yup from "yup";
 import AppTextInput from "../reusableComponents/AppTextInput";
 import AppButton from "../reusableComponents/AppButton";
 import AppErrors from "../reusableComponents/AppErrors";
+import AppFormField from "../reusableComponents/AppFormField";
 
 let schema = yup.object().shape({
   name: yup.string().required().min(6).label("Name"),
-  email: yup.string().email().label("Email"),
+  email: yup.string().email().required().label("Email"),
   password: yup.string().min(4).required().label("Password"),
 });
 
@@ -21,39 +22,33 @@ function RegisterScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={schema}
       >
-        {({ handleChange, handleSubmit, touched, setFieldTouched, errors }) => {
+        {({ handleSubmit }) => {
           return (
             <>
-              <AppTextInput
+              <AppFormField
                 icon="face-woman"
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoComplete={false}
                 placeholder="Name"
-                onChangeText={handleChange("name")}
-                onBlur={() => setFieldTouched("name")}
+                name="name"
               />
-              {touched.name && <AppErrors>{errors.name}</AppErrors>}
-              <AppTextInput
+              <AppFormField
                 icon="email"
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoComplete={false}
                 placeholder="Email"
                 textContentType="emailAddress"
-                onChangeText={handleChange("email")}
-                onBlur={() => setFieldTouched("email")}
+                name="email"
               />
-              {touched.email && <AppErrors>{errors.email}</AppErrors>}
-              <AppTextInput
+              <AppFormField
                 icon="account-lock"
                 placeholder="Password"
                 secureTextEntry={true}
                 textContentType="password"
-                onChangeText={handleChange("password")}
-                onBlur={() => setFieldTouched("password")}
+                name="password"
               />
-              {touched.password && <AppErrors>{errors.password}</AppErrors>}
               <AppButton
                 name="login"
                 color="secondaryColor"
