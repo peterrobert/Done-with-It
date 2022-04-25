@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import AppFormField from "../reusableComponents/AppFormField";
 import * as yup from "yup";
 import SubmitButton from "../reusableComponents/SubmitButton";
@@ -7,15 +7,27 @@ import AppFormPicker from "../reusableComponents/AppFormPicker";
 
 const schema = yup.object().shape({
   title: yup.string().required().min(6).label("Title"),
-  price: yup.string().required().label("Price"),
-  category: yup.string().min(4).required().label("Category"),
-  description: yup.string().min(4).required().label("Description"),
+  price: yup.number().required().min(1).max(1000).label("Price"),
+  category: yup.string().required().nullable().label("Category"),
+  description: yup.string().min(4).label("Description"),
 });
 
+const data = [
+  {
+    id: 1,
+    category: "test category",
+  },
+  {
+    id: 2,
+    category: "test category again",
+  },
+];
+
 function ListEditScreen() {
+  const [category, setCategory] = useState("Category");
   return (
     <Formik
-      initialValues={{ title: "", price: "", category: "", description: "" }}
+      initialValues={{ title: "", price: "", category: null, description: "" }}
       onSubmit={(values) => console.log(values)}
       validationSchema={schema}
     >
@@ -37,7 +49,12 @@ function ListEditScreen() {
               placeholder="Price"
             />
 
-            <AppFormPicker name="category" />
+            <AppFormPicker
+              name="category"
+              items={data}
+              setCategory={setCategory}
+              placeholder={category}
+            />
 
             <AppFormField
               name="description"
@@ -45,6 +62,8 @@ function ListEditScreen() {
               autoCorrect
               autoComplete
               placeholder="description"
+              multiline
+              numberOfLines={3}
             />
 
             <SubmitButton name="submit" />

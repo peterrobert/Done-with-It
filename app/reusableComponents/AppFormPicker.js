@@ -3,11 +3,11 @@ import React from "react";
 import AppPicker from "../reusableComponents/AppPicker";
 import AppErrors from "./AppErrors";
 
-function AppFormPicker({ name }) {
+function AppFormPicker({ name, ...otherProps }) {
   const { touched, errors } = useFormikContext();
   return (
     <>
-      <AppPicker placeholder={name} />
+      <AppPicker placeholder={name} {...otherProps} />
       {touched[name] && <AppErrors>{errors[name]}</AppErrors>}
     </>
   );
