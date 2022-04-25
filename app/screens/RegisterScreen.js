@@ -3,10 +3,8 @@ import { View, StyleSheet } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 
-import AppTextInput from "../reusableComponents/AppTextInput";
-import AppButton from "../reusableComponents/AppButton";
-import AppErrors from "../reusableComponents/AppErrors";
 import AppFormField from "../reusableComponents/AppFormField";
+import SubmitButton from "../reusableComponents/SubmitButton";
 
 let schema = yup.object().shape({
   name: yup.string().required().min(6).label("Name"),
@@ -22,7 +20,7 @@ function RegisterScreen() {
         onSubmit={(values) => console.log(values)}
         validationSchema={schema}
       >
-        {({ handleSubmit }) => {
+        {({}) => {
           return (
             <>
               <AppFormField
@@ -49,11 +47,7 @@ function RegisterScreen() {
                 textContentType="password"
                 name="password"
               />
-              <AppButton
-                name="login"
-                color="secondaryColor"
-                onPress={handleSubmit}
-              />
+              <SubmitButton name="register" />
             </>
           );
         }}

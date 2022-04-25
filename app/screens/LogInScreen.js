@@ -1,13 +1,11 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { Formik } from "formik";
 // === Form validation using yup == Import it first ===
 import * as yup from "yup";
 
-import AppTextInput from "../reusableComponents/AppTextInput";
-import AppButton from "../reusableComponents/AppButton";
-import AppErrors from "../reusableComponents/AppErrors";
 import AppFormField from "../reusableComponents/AppFormField";
+import SubmitButton from "../reusableComponents/SubmitButton";
 // === Define yup validation schema out side of the component to avoid re-render
 
 let schema = yup.object().shape({
@@ -43,11 +41,7 @@ function LogInScreen() {
                 secureTextEntry={true}
                 textContentType="password"
               />
-              <AppButton
-                name="login"
-                color="secondaryColor"
-                onPress={handleSubmit}
-              />
+              <SubmitButton name="login" handleSubmit={handleSubmit} />
             </>
           );
         }}
