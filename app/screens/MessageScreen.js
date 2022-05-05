@@ -2,8 +2,6 @@ import React from "react";
 import { View, Text, FlatList } from "react-native";
 import ListItem from "../reusableComponents/ListItem";
 import SeparatorComponent from "../reusableComponents/SeparatorComponent";
-// === For use to have a swipe functionality we must install expo gesture handlers.
-// === I will come back to this taking so much time
 
 const data = [
   {

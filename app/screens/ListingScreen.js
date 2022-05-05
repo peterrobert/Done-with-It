@@ -13,13 +13,13 @@ function ListingScreen({ navigation }) {
     {
       id: 2,
       productName: "A red jacket",
-      price: "200$",
+      price: "500$",
       image: require("../assets/jacket.jpg"),
     },
     {
       id: 3,
       productName: "A red jacket",
-      price: "200$",
+      price: "600$",
       image: require("../assets/jacket.jpg"),
     },
   ];
@@ -29,7 +29,7 @@ function ListingScreen({ navigation }) {
         title={item.productName}
         subTitle={item.price}
         image={item.image}
-        onPress={() => navigation.navigate("listDetails")}
+        onPress={() => navigation.navigate("listDetails", { item })}
       />
     );
   };
