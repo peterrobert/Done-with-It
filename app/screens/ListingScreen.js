@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import Card from "../reusableComponents/Card";
-function ListingScreen() {
+import Screen from "../reusableComponents/Screen";
+function ListingScreen({ navigation }) {
   const data = [
     {
       id: 1,
@@ -24,17 +25,22 @@ function ListingScreen() {
   ];
   const renderListItems = ({ item }) => {
     return (
-      <Card title={item.productName} subTitle={item.price} image={item.image} />
+      <Card
+        title={item.productName}
+        subTitle={item.price}
+        image={item.image}
+        onPress={() => navigation.navigate("listDetails")}
+      />
     );
   };
   return (
-    <View>
+    <Screen>
       <FlatList
         data={data}
         renderItem={renderListItems}
         keyExtractor={(item) => item.id.toString()}
       />
-    </View>
+    </Screen>
   );
 }
 

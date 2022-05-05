@@ -1,47 +1,50 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import ListItem from "../reusableComponents/ListItem";
 import * as appColor from "../config/appColors";
 import { MaterialIcons } from "@expo/vector-icons";
-function AccountScreen() {
+import Screen from "../reusableComponents/Screen";
+function AccountScreen({ navigation }) {
   const handleLogOut = () => {
     console.log("logOut");
   };
 
   return (
     <>
-      <View style={styles.accountContainer}>
-        <ListItem
-          title={"Mosh Hamedani"}
-          subTitle={"pwambui93@gmail.com"}
-          image={require("../assets/mosh.jpg")}
-        />
-      </View>
-      <View style={styles.listContainer}>
-        <ListItem
-          title={"My Listings"}
-          icon={
-            <MaterialIcons
-              name="format-list-bulleted"
-              size={25}
-              color="black"
-            />
-          }
-        />
+      <Screen>
+        <View style={styles.accountContainer}>
+          <ListItem
+            title={"Mosh Hamedani"}
+            subTitle={"pwambui93@gmail.com"}
+            image={require("../assets/mosh.jpg")}
+          />
+        </View>
+        <View style={styles.listContainer}>
+          <ListItem
+            title={"My Listings"}
+            icon={
+              <MaterialIcons
+                name="format-list-bulleted"
+                size={25}
+                color="black"
+              />
+            }
+          />
+          <ListItem
+            title={"My Messages"}
+            icon={<MaterialIcons name="email" size={25} color="black" />}
+            onPress={() => navigation.navigate("messages")}
+          />
+        </View>
 
-        <ListItem
-          title={"My Messages"}
-          icon={<MaterialIcons name="email" size={25} color="black" />}
-        />
-      </View>
-
-      <View style={styles.logOutConatiner}>
-        <ListItem
-          title={"Log Out"}
-          icon={<MaterialIcons name="logout" size={25} color="black" />}
-          onPress={handleLogOut}
-        />
-      </View>
+        <View style={styles.logOutConatiner}>
+          <ListItem
+            title={"Log Out"}
+            icon={<MaterialIcons name="logout" size={25} color="black" />}
+            onPress={handleLogOut}
+          />
+        </View>
+      </Screen>
     </>
   );
 }

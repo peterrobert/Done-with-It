@@ -4,6 +4,7 @@ import AppFormField from "../reusableComponents/AppFormField";
 import * as yup from "yup";
 import SubmitButton from "../reusableComponents/SubmitButton";
 import AppFormPicker from "../reusableComponents/AppFormPicker";
+import Screen from "../reusableComponents/Screen";
 
 const schema = yup.object().shape({
   title: yup.string().required().min(6).label("Title"),
@@ -26,51 +27,58 @@ const data = [
 function ListEditScreen() {
   const [category, setCategory] = useState("Category");
   return (
-    <Formik
-      initialValues={{ title: "", price: "", category: null, description: "" }}
-      onSubmit={(values) => console.log(values)}
-      validationSchema={schema}
-    >
-      {() => {
-        return (
-          <>
-            <AppFormField
-              name="title"
-              autoCapitalize="none"
-              autoCorrect
-              autoComplete
-              placeholder="Title"
-            />
-            <AppFormField
-              name="price"
-              autoCapitalize="none"
-              autoCorrect={false}
-              autoComplete={false}
-              placeholder="Price"
-            />
+    <Screen>
+      <Formik
+        initialValues={{
+          title: "",
+          price: "",
+          category: null,
+          description: "",
+        }}
+        onSubmit={(values) => console.log(values)}
+        validationSchema={schema}
+      >
+        {() => {
+          return (
+            <>
+              <AppFormField
+                name="title"
+                autoCapitalize="none"
+                autoCorrect
+                autoComplete
+                placeholder="Title"
+              />
+              <AppFormField
+                name="price"
+                autoCapitalize="none"
+                autoCorrect={false}
+                autoComplete={false}
+                placeholder="Price"
+              />
 
-            <AppFormPicker
-              name="category"
-              items={data}
-              setCategory={setCategory}
-              placeholder={category}
-            />
+              <AppFormPicker
+                name="category"
+                items={data}
+                setCategory={setCategory}
+                placeholder={category}
+              />
 
-            <AppFormField
-              name="description"
-              autoCapitalize="none"
-              autoCorrect
-              autoComplete
-              placeholder="description"
-              multiline
-              numberOfLines={3}
-            />
+              <AppFormField
+                name="description"
+                autoCapitalize="none"
+                autoCorrect
+                autoComplete
+                placeholder="description"
+                multiline
+                numberOfLines={3}
+              />
 
-            <SubmitButton name="submit" />
-          </>
-        );
-      }}
-    </Formik>
+              <SubmitButton name="submit" />
+            </>
+          );
+        }}
+      </Formik>
+    </Screen>
   );
 }
 
