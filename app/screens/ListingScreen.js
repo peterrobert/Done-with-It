@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, StyleSheet, Button } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  ActivityIndicator,
+} from "react-native";
 import { getListings } from "../api/listings";
+import Appactivityindicator from "../reusableComponents/AppActivityIndicator";
 
 import Card from "../reusableComponents/Card";
 import Screen from "../reusableComponents/Screen";
@@ -8,21 +16,20 @@ import Screen from "../reusableComponents/Screen";
 function ListingScreen({ navigation }) {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, isLoading] = useState(false);
 
   useEffect(() => {
     populateListings();
   }, []);
 
   const populateListings = async () => {
+    isLoading(true);
     const response = await getListings;
-    console.log(response);
+    isLoading(false);
 
-    // if (!response.ok) {
-    //   setError(true);
-    //   return;
-    // }
+    if (!response.ok) return setError(true);
 
-    // setError(false);
+    setError(false);
     setListings(response.data);
   };
 
@@ -38,6 +45,12 @@ function ListingScreen({ navigation }) {
   };
   return (
     <Screen>
+      {loading === true ? (
+        <Appactivityindicator
+          visible={loading}
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        />
+      ) : null}
       {error === true ? (
         <View style={styles.errorMessage}>
           <Text style={styles.tryButton}>
@@ -46,7 +59,7 @@ function ListingScreen({ navigation }) {
           <Button
             title="Try again"
             color="#841584"
-            onPress={populateListings}
+            onPress={() => populateListings()}
           />
         </View>
       ) : null}
