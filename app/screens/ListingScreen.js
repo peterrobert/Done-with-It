@@ -1,37 +1,23 @@
 import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-} from "react-native";
+import { FlatList, View, Text, StyleSheet, Button } from "react-native";
 import { getListings } from "../api/listings";
+import useApi from "../hooks/useApi";
 import Appactivityindicator from "../reusableComponents/AppActivityIndicator";
 
 import Card from "../reusableComponents/Card";
 import Screen from "../reusableComponents/Screen";
 
 function ListingScreen({ navigation }) {
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, isLoading] = useState(false);
+  const {
+    data: listings,
+    loading,
+    error,
+    request: populateListings,
+  } = useApi(getListings);
 
   useEffect(() => {
     populateListings();
   }, []);
-
-  const populateListings = async () => {
-    isLoading(true);
-    const response = await getListings;
-    isLoading(false);
-
-    if (!response.ok) return setError(true);
-
-    setError(false);
-    setListings(response.data);
-  };
 
   const renderListItems = ({ item }) => {
     return (
