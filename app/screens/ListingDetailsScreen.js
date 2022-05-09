@@ -10,12 +10,12 @@ function ListingDetailsScreen({ route }) {
     <View style={styles.listingContainer}>
       <View>
         <Image
-          source={item.image}
+          source={{ uri: item.images[0].url }}
           style={styles.imageContainer}
           resizeMode="cover"
         />
         <View style={styles.priceContainer}>
-          <Text style={styles.ItemName}> {item.productName}</Text>
+          <Text style={styles.ItemName}> {item.title}</Text>
           <Text style={styles.itemPrice}> {item.price}</Text>
         </View>
         <ListItem />
