@@ -5,6 +5,7 @@ import * as yup from "yup";
 import SubmitButton from "../reusableComponents/SubmitButton";
 import AppFormPicker from "../reusableComponents/AppFormPicker";
 import Screen from "../reusableComponents/Screen";
+import useApi from "../hooks/useApi";
 
 const schema = yup.object().shape({
   title: yup.string().required().min(6).label("Title"),
@@ -13,7 +14,7 @@ const schema = yup.object().shape({
   description: yup.string().min(4).label("Description"),
 });
 
-const data = [
+const categoryData = [
   {
     id: 1,
     category: "test category",
@@ -26,16 +27,26 @@ const data = [
 
 function ListEditScreen() {
   const [category, setCategory] = useState("Category");
+  const { request: postListing, data } = useApi();
+  console.log(data);
   return (
     <Screen>
       <Formik
         initialValues={{
           title: "",
           price: "",
-          category: null,
+          category: category,
           description: "",
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          const data = {
+            ...values,
+            category: 1,
+            images: [{ url: require("../assets/chair.jpg") }],
+          };
+          console.log(data);
+          postListing(data);
+        }}
         validationSchema={schema}
       >
         {() => {
@@ -58,7 +69,7 @@ function ListEditScreen() {
 
               <AppFormPicker
                 name="category"
-                items={data}
+                items={categoryData}
                 setCategory={setCategory}
                 placeholder={category}
               />

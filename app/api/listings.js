@@ -2,6 +2,11 @@ import apiClient from "./client";
 
 const endPoint = "./listings";
 
-const getListings = apiClient.get(endPoint);
+const getListings = () => {
+  return apiClient.get(endPoint);
+};
+const postListing = (data) => {
+  return apiClient.post(endPoint, data);
+};
 
-export { getListings };
+export { getListings, postListing };

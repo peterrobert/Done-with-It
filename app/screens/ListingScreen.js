@@ -36,7 +36,13 @@ function ListingScreen({ navigation }) {
           visible={loading}
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         />
-      ) : null}
+      ) : (
+        <FlatList
+          data={listings}
+          renderItem={renderListItems}
+          keyExtractor={(item) => item.id.toString()}
+        />
+      )}
       {error === true ? (
         <View style={styles.errorMessage}>
           <Text style={styles.tryButton}>
@@ -49,11 +55,6 @@ function ListingScreen({ navigation }) {
           />
         </View>
       ) : null}
-      <FlatList
-        data={listings}
-        renderItem={renderListItems}
-        keyExtractor={(item) => item.id.toString()}
-      />
     </Screen>
   );
 }

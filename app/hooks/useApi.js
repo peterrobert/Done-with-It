@@ -5,9 +5,9 @@ const useApi = (apiMethod) => {
   const [error, setError] = useState(false);
   const [loading, isLoading] = useState(false);
 
-  const request = async () => {
+  const request = async (...args) => {
     isLoading(true);
-    const response = await apiMethod;
+    const response = await apiMethod(...args);
     isLoading(false);
 
     if (!response.ok) return setError(true);

@@ -4,14 +4,18 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as appColor from "../config/appColors";
 import { TouchableWithoutFeedback } from "react-native";
 import PickerItem from "./PickerItem";
+import { useFormikContext } from "formik";
 
-function AppPicker({ icon, placeholder, items, setCategory, ...otherProps }) {
+function AppPicker({ icon, placeholder, items, setCategory }) {
   const [showModal, setShowModal] = useState(false);
+  const { handleChange } = useFormikContext();
+
   const renderItem = ({ item }) => (
     <PickerItem
       name={item.category}
       onPress={() => {
         setCategory(item.category);
+        handleChange(item.category);
         setShowModal(false);
       }}
     />
