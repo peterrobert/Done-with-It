@@ -1,11 +1,15 @@
-import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Image, StyleSheet, Text } from "react-native";
 import { Formik } from "formik";
+import jwt_decode from "jwt-decode";
 // === Form validation using yup == Import it first ===
 import * as yup from "yup";
 
 import AppFormField from "../reusableComponents/AppFormField";
 import SubmitButton from "../reusableComponents/SubmitButton";
+import { logIn } from "../api/auth";
+import AppErrors from "../reusableComponents/AppErrors";
+
 // === Define yup validation schema out side of the component to avoid re-render
 
 let schema = yup.object().shape({
@@ -14,12 +18,29 @@ let schema = yup.object().shape({
 });
 
 function LogInScreen() {
+  const [error, setError] = useState(false);
+
+  const userLogin = async ({ email, password }) => {
+    const response = await logIn(email, password);
+    if (!response.ok) return setError(true);
+
+    setError(false);
+    const currentUser = jwt_decode(response.data);
+
+    console.log(currentUser);
+  };
+
   return (
     <View>
       <Image source={require("../assets/logo-red.png")} style={styles.logo} />
+      {error && (
+        <AppErrors>
+          <Text>Invalid email or password</Text>
+        </AppErrors>
+      )}
       <Formik
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => userLogin(values)}
         validationSchema={schema}
       >
         {({ handleSubmit }) => {

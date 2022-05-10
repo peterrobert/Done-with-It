@@ -5,8 +5,8 @@ import ListEditScreen from "./app/screens/ListEditScreen";
 export default function App() {
   return (
     <NavigationContainer>
-      <AppNavigator />
-      {/* <ListEditScreen /> */}
+      {/* <AppNavigator /> */}
+      <AuthNavigator />
     </NavigationContainer>
   );
 }
