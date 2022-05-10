@@ -1,10 +1,13 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, StyleSheet, Text } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 
 import AppFormField from "../reusableComponents/AppFormField";
 import SubmitButton from "../reusableComponents/SubmitButton";
+import { signUp } from "../api/auth";
+import AppErrors from "../reusableComponents/AppErrors";
+import { AuthContext } from "../auth/context";
 
 let schema = yup.object().shape({
   name: yup.string().required().min(6).label("Name"),
@@ -13,11 +16,38 @@ let schema = yup.object().shape({
 });
 
 function RegisterScreen() {
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const authContext = useContext(AuthContext);
+
+  const handleRegistration = async ({ name, email, password }) => {
+    const response = await signUp(name, email, password);
+
+    if (!response.ok) {
+      setIsError(true);
+      setErrorMessage(response.data.error);
+      return;
+    }
+
+    const user = {
+      id: response.data.id,
+      name: response.data.name,
+      email: response.data.email,
+    };
+
+    authContext.setCurrentUser(user);
+  };
+
   return (
     <View style={styles.registerContainer}>
+      {isError && (
+        <AppErrors>
+          <Text>{errorMessage}</Text>
+        </AppErrors>
+      )}
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(value) => handleRegistration(value)}
         validationSchema={schema}
       >
         {({}) => {
