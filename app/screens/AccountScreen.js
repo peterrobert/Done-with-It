@@ -1,12 +1,18 @@
-import React from "react";
-import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import React, { useContext } from "react";
+import { View, StyleSheet } from "react-native";
 import ListItem from "../reusableComponents/ListItem";
 import * as appColor from "../config/appColors";
 import { MaterialIcons } from "@expo/vector-icons";
 import Screen from "../reusableComponents/Screen";
+import { AuthContext } from "../auth/context";
+import { removeToken } from "../api/storage";
+
 function AccountScreen({ navigation }) {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+
   const handleLogOut = () => {
-    console.log("logOut");
+    setCurrentUser(null);
+    removeToken();
   };
 
   return (
@@ -14,8 +20,8 @@ function AccountScreen({ navigation }) {
       <Screen>
         <View style={styles.accountContainer}>
           <ListItem
-            title={"Mosh Hamedani"}
-            subTitle={"pwambui93@gmail.com"}
+            title={currentUser.name}
+            subTitle={currentUser.email}
             image={require("../assets/mosh.jpg")}
           />
         </View>

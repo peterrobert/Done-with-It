@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Image, StyleSheet, Text } from "react-native";
 import { Formik } from "formik";
 import jwt_decode from "jwt-decode";
@@ -9,6 +9,8 @@ import AppFormField from "../reusableComponents/AppFormField";
 import SubmitButton from "../reusableComponents/SubmitButton";
 import { logIn } from "../api/auth";
 import AppErrors from "../reusableComponents/AppErrors";
+import { AuthContext } from "../auth/context";
+import { saveToken } from "../api/storage";
 
 // === Define yup validation schema out side of the component to avoid re-render
 
@@ -19,15 +21,16 @@ let schema = yup.object().shape({
 
 function LogInScreen() {
   const [error, setError] = useState(false);
+  const authContext = useContext(AuthContext);
 
   const userLogin = async ({ email, password }) => {
     const response = await logIn(email, password);
     if (!response.ok) return setError(true);
 
     setError(false);
-    const currentUser = jwt_decode(response.data);
-
-    console.log(currentUser);
+    const user = jwt_decode(response.data);
+    authContext.setCurrentUser(user);
+    saveToken(response.data);
   };
 
   return (
